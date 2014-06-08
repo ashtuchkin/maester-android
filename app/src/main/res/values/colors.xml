@@ -4,4 +4,11 @@
     <color name="swipe_refresh_color2">#990f30</color>
     <color name="swipe_refresh_color3">#fb678b</color>
     <color name="swipe_refresh_color4">#6b182b</color>
+    <color name="action_button_pressed">#131a5d</color>
+    <color name="action_button">#151942</color>
+    <color name="action_button_last_pressed">#ee5d8d</color>
+    <color name="action_button_last">#e0ee5d8d</color>
+    <color name="answer_button">#c3cad4</color>
+    <color name="answer_button_text">#151942</color>
+    <color name="answer_button_pressed">#adb8c8</color>
 </resources>

@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -117,23 +118,31 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
         LinearLayout buttonLayout = (LinearLayout)rootView.findViewById(R.id.buttonLayout);
         if (mSlide.answers != null) {
             for (CourseModel.Slide.Answer answer : mSlide.answers) if (answer != null) {
-                Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
+                View view = inflater.inflate(R.layout.answer_button, container, false);
+                Button btn = (Button)view.findViewById(R.id.button);
                 btn.setText(answer.text);
                 btn.setHorizontallyScrolling(false); // Allow slide swiping.
                 btn.setTag(answer);
                 btn.setOnClickListener(this);
-                buttonLayout.addView(btn);
+                btn.setBackgroundResource(R.drawable.btn_answer);
+                btn.setTextColor(getResources().getColor(R.color.answer_button_text));
+                buttonLayout.addView(view);
             }
         }
 
         if (mSlide.buttons != null) {
             for (CourseModel.Slide.Button button : mSlide.buttons) if (button != null) {
-                Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
+                View view = inflater.inflate(R.layout.answer_button, container, false);
+                Button btn = (Button)view.findViewById(R.id.button);
                 btn.setText(button.text);
                 btn.setHorizontallyScrolling(false); // Allow slide swiping.
                 btn.setTag(button);
                 btn.setOnClickListener(this);
-                buttonLayout.addView(btn);
+                boolean isLastSlide = mPos == mTotal;
+                btn.setBackgroundResource(isLastSlide ? R.drawable.btn_action_last : R.drawable.btn_action);
+                if (isLastSlide)
+                    view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int)(65 * getResources().getDisplayMetrics().density)));
+                buttonLayout.addView(view);
             }
         }
 
@@ -193,7 +202,14 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getTag() instanceof CourseModel.Slide.Answer) {
             CourseModel.Slide.Answer ans = (CourseModel.Slide.Answer)view.getTag();
-            ((Button)view).setTextColor(ans.correct ? Color.parseColor("#00A000") : Color.RED);
+            Button btn = (Button)view;
+            btn.setBackgroundResource(R.drawable.btn_answer_answered);
+            btn.setTextColor(Color.WHITE);
+            ImageView icon = (ImageView)((View)btn.getParent()).findViewById(R.id.icon);
+            if (ans.correct)
+                icon.setImageDrawable(new ColorDrawable(Color.parseColor("#00A000")));
+            else
+                icon.setImageDrawable(new ColorDrawable(Color.RED));
             if (ans.hint != null) {
                 Toast.makeText(getActivity(), ans.hint, Toast.LENGTH_SHORT).show();
             }

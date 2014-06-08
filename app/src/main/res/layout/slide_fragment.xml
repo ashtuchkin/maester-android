@@ -28,7 +28,10 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:id="@+id/buttonLayout"
-        android:scrollHorizontally="false">
+        android:scrollHorizontally="false"
+        android:divider="@drawable/button_divider"
+        android:showDividers="middle"
+        android:dividerPadding="1dp">
 
 
 
