@@ -50,6 +50,7 @@ public class CourseListActivity extends ActionBarActivity implements SwipeRefres
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list);
+        setTitle(" Featured Courses");
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.course_list_layout);
         refreshLayout.setOnRefreshListener(this);

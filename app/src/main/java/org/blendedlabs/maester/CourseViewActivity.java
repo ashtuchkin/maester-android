@@ -62,9 +62,10 @@ public class CourseViewActivity extends FragmentActivity {
 
         if (savedInstanceState != null) {
             mCourse = savedInstanceState.getParcelable("course");
-            setTitle(mCourse.name);
+            setTitle(" " + mCourse.name);
             mSlideAdapter.setCourseSlides(mCourseUrl, mCourse.slides);
         } else {
+            setTitle("");
             loadCourseData(false);
         }
 
@@ -133,7 +134,7 @@ public class CourseViewActivity extends FragmentActivity {
                     return;
                 }
 
-                setTitle(mCourse.name);
+                setTitle(" " + mCourse.name);
                 if (mSlideAdapter != null)
                     mSlideAdapter.setCourseSlides(mCourseUrl, mCourse.slides);
 
