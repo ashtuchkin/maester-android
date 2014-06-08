@@ -139,7 +139,8 @@ public class CourseListActivity extends ActionBarActivity implements SwipeRefres
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            //startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
