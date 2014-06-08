@@ -1,5 +1,6 @@
 package org.blendedlabs.maester;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,12 +48,10 @@ public class CourseViewActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        if (getResources().getConfiguration().orientation == 1) {
-            getActionBar().show();
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getActionBar().hide();
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR | Window.FEATURE_ACTION_BAR_OVERLAY);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().hide();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 

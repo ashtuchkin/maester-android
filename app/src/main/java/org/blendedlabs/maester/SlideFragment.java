@@ -1,5 +1,6 @@
 package org.blendedlabs.maester;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -135,6 +136,17 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
                 buttonLayout.addView(btn);
             }
         }
+
+        mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActionBar bar = getActivity().getActionBar();
+                if (bar.isShowing())
+                    bar.hide();
+                else
+                    bar.show();
+            }
+        });
 
         return rootView;
     }
