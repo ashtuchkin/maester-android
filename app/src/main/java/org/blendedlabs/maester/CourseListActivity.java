@@ -54,6 +54,8 @@ public class CourseListActivity extends ActionBarActivity implements SwipeRefres
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.course_list_layout);
         refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setColorScheme(R.color.swipe_refresh_color1, R.color.swipe_refresh_color2,
+                R.color.swipe_refresh_color3, R.color.swipe_refresh_color4);
 
         listView = (ListView) findViewById(R.id.list);
 
