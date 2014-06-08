@@ -115,7 +115,7 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
 
         LinearLayout buttonLayout = (LinearLayout)rootView.findViewById(R.id.buttonLayout);
         if (mSlide.answers != null) {
-            for (CourseModel.Slide.Answer answer : mSlide.answers) {
+            for (CourseModel.Slide.Answer answer : mSlide.answers) if (answer != null) {
                 Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
                 btn.setText(answer.text);
                 btn.setHorizontallyScrolling(false); // Allow slide swiping.
@@ -126,7 +126,7 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
         }
 
         if (mSlide.buttons != null) {
-            for (CourseModel.Slide.Button button : mSlide.buttons) {
+            for (CourseModel.Slide.Button button : mSlide.buttons) if (button != null) {
                 Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
                 btn.setText(button.text);
                 btn.setHorizontallyScrolling(false); // Allow slide swiping.
