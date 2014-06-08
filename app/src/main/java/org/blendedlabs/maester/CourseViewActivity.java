@@ -50,6 +50,7 @@ public class CourseViewActivity extends FragmentActivity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         if (getResources().getConfiguration().orientation == 1) {
             getActionBar().show();
+            getActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
             getActionBar().hide();
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

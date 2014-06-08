@@ -22,7 +22,11 @@
 
         <activity
             android:name="org.blendedlabs.maester.CourseViewActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:parentActivityName="org.blendedlabs.maester.CourseListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.blendedlabs.maester.CourseListActivity" />
         </activity>
 
         <service
@@ -36,7 +40,7 @@
             android:parentActivityName="org.blendedlabs.maester.CourseListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="CourseListActivity" />
+                android:value="org.blendedlabs.maester.CourseListActivity" />
         </activity>
     </application>
 
