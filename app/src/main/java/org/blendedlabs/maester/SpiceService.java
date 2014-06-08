@@ -16,7 +16,7 @@ import roboguice.util.temp.Ln;
 
 public class SpiceService extends RetrofitGsonSpiceService {
 
-    public static final Uri baseUrl = Uri.parse("https://raw.githubusercontent.com/blendedlabs/verner-courses/master/");
+    public static final Uri baseUrl = Uri.parse("https://raw.githubusercontent.com/ashtuchkin/maester-courses/master/");
 
     @Override
     protected String getServerUrl() {

@@ -14,29 +14,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/textView"
-        android:textColor="#ffffffff"
-        android:padding="30dp"
         android:gravity="center"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/buttonLayout"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:scrollbars="vertical" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="54dp"
-        android:layout_marginBottom="134dp"
-        style="?android:attr/borderlessButtonStyle" />
+        android:orientation="vertical"
+        android:id="@+id/buttonLayout"
+        android:scrollHorizontally="false">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
-        android:layout_toRightOf="@+id/button"
-        android:layout_marginLeft="51dp" />
+
+
+    </LinearLayout>
+
+    <!--         android:textColor="#ffffffff"
+    -->
+    <!-- ?android:attr/borderlessButtonStyle -->
 </RelativeLayout>

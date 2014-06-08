@@ -5,13 +5,16 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,7 @@ import com.octo.android.robospice.request.simple.BitmapRequest;
 
 import java.io.File;
 
-public class SlideFragment extends Fragment {
+public class SlideFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_SLIDE = "slide";
     private static final String ARG_SLIDE_POS = "slide_pos";
     private static final String ARG_SLIDE_TOTAL = "slide_total";
@@ -94,16 +97,32 @@ public class SlideFragment extends Fragment {
         mImageView = (ImageView) rootView.findViewById(R.id.imageView);
         mTextView  = (TextView) rootView.findViewById(R.id.textView);
 
+        mTextView.setMovementMethod(new ScrollingMovementMethod()); // Set text view scrollable.
+
         if (mSlide.text != null)
             mTextView.setText(mSlide.text);
         if (mSlide.backgroundColor != null)
             rootView.setBackgroundColor(Color.parseColor(mSlide.backgroundColor));
+        if (mSlide.textColor != null)
+            mTextView.setTextColor(Color.parseColor(mSlide.textColor));
 
         // Use retained bitmap if available, request otherwise.
         if (mBitmap != null)
             mImageView.setImageBitmap(mBitmap);
         else if (mSlide.imageUrl != null)
             requestSlideImage(mSlide.imageUrl);
+
+        if (mSlide.answers != null) {
+            LinearLayout buttonLayout = (LinearLayout)rootView.findViewById(R.id.buttonLayout);
+            for (CourseModel.Slide.Answer answer : mSlide.answers) {
+                Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
+                btn.setText(answer.text);
+                btn.setHorizontallyScrolling(false); // Allow slide swiping.
+                btn.setTag(answer);
+                btn.setOnClickListener(this);
+                buttonLayout.addView(btn);
+            }
+        }
 
         return rootView;
     }
@@ -144,5 +163,14 @@ public class SlideFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        CourseModel.Slide.Answer ans = (CourseModel.Slide.Answer)view.getTag();
+        ((Button)view).setTextColor(ans.correct ? Color.parseColor("#00A000") : Color.RED);
+        if (ans.hint != null) {
+            Toast.makeText(getActivity(), ans.hint, Toast.LENGTH_SHORT).show();
+        }
     }
 }

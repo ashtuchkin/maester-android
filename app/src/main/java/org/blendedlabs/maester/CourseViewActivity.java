@@ -62,6 +62,7 @@ public class CourseViewActivity extends FragmentActivity {
 
         if (savedInstanceState != null) {
             mCourse = savedInstanceState.getParcelable("course");
+            setTitle(mCourse.name);
             mSlideAdapter.setCourseSlides(mCourseUrl, mCourse.slides);
         } else {
             loadCourseData(false);
