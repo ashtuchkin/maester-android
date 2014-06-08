@@ -35,6 +35,7 @@ public class CourseModel implements Parcelable {
         public String backgroundColor;
         public String textColor;
         public Answer[] answers;
+        public Button[] buttons;
 
         public Slide(Parcel in) {
             imageUrl = in.readString();
@@ -42,6 +43,7 @@ public class CourseModel implements Parcelable {
             backgroundColor = in.readString();
             textColor = in.readString();
             answers = in.createTypedArray(Answer.CREATOR);
+            buttons = in.createTypedArray(Button.CREATOR);
         }
 
         @Override
@@ -56,6 +58,7 @@ public class CourseModel implements Parcelable {
             out.writeString(backgroundColor);
             out.writeString(textColor);
             out.writeTypedArray(answers, 0);
+            out.writeTypedArray(buttons, 0);
         }
 
         public static final Creator<Slide> CREATOR = new Creator<Slide>() {
@@ -87,6 +90,30 @@ public class CourseModel implements Parcelable {
             public static final Creator<Answer> CREATOR = new Creator<Answer>() {
                 public Answer createFromParcel(Parcel in) { return new Answer(in); }
                 public Answer[] newArray(int size) { return new Answer[size]; }
+            };
+        }
+
+        public static class Button implements Parcelable {
+            public String text;
+            public String action;
+
+            public Button(Parcel in) {
+                text = in.readString();
+                action = in.readString();
+            }
+
+            @Override
+            public int describeContents() { return 0; }
+
+            @Override
+            public void writeToParcel(Parcel out, int i) {
+                out.writeString(text);
+                out.writeString(action);
+            }
+
+            public static final Creator<Button> CREATOR = new Creator<Button>() {
+                public Button createFromParcel(Parcel in) { return new Button(in); }
+                public Button[] newArray(int size) { return new Button[size]; }
             };
         }
     }

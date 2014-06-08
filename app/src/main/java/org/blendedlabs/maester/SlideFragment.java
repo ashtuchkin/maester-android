@@ -1,5 +1,6 @@
 package org.blendedlabs.maester;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -112,13 +113,24 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
         else if (mSlide.imageUrl != null)
             requestSlideImage(mSlide.imageUrl);
 
+        LinearLayout buttonLayout = (LinearLayout)rootView.findViewById(R.id.buttonLayout);
         if (mSlide.answers != null) {
-            LinearLayout buttonLayout = (LinearLayout)rootView.findViewById(R.id.buttonLayout);
             for (CourseModel.Slide.Answer answer : mSlide.answers) {
                 Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
                 btn.setText(answer.text);
                 btn.setHorizontallyScrolling(false); // Allow slide swiping.
                 btn.setTag(answer);
+                btn.setOnClickListener(this);
+                buttonLayout.addView(btn);
+            }
+        }
+
+        if (mSlide.buttons != null) {
+            for (CourseModel.Slide.Button button : mSlide.buttons) {
+                Button btn = (Button)inflater.inflate(R.layout.answer_button, container, false);
+                btn.setText(button.text);
+                btn.setHorizontallyScrolling(false); // Allow slide swiping.
+                btn.setTag(button);
                 btn.setOnClickListener(this);
                 buttonLayout.addView(btn);
             }
@@ -167,10 +179,25 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        CourseModel.Slide.Answer ans = (CourseModel.Slide.Answer)view.getTag();
-        ((Button)view).setTextColor(ans.correct ? Color.parseColor("#00A000") : Color.RED);
-        if (ans.hint != null) {
-            Toast.makeText(getActivity(), ans.hint, Toast.LENGTH_SHORT).show();
+        if (view.getTag() instanceof CourseModel.Slide.Answer) {
+            CourseModel.Slide.Answer ans = (CourseModel.Slide.Answer)view.getTag();
+            ((Button)view).setTextColor(ans.correct ? Color.parseColor("#00A000") : Color.RED);
+            if (ans.hint != null) {
+                Toast.makeText(getActivity(), ans.hint, Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if (view.getTag() instanceof CourseModel.Slide.Button) {
+            CourseModel.Slide.Button btn = (CourseModel.Slide.Button)view.getTag();
+            String action = btn.action;
+            if (action != null) {
+                if (action.equals("close") || action.equals("back")) {
+                    getActivity().finish();
+                }
+                else {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(action));
+                    getActivity().startActivity(intent);
+                }
+            }
         }
     }
 }
