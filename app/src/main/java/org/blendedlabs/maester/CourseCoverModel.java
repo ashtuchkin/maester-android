@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class CourseCoverModel implements Parcelable {
     public String name;
+    public String author;
     public String imageUrl;
     public String courseUrl;
 
@@ -20,6 +21,7 @@ public class CourseCoverModel implements Parcelable {
         CourseCoverModel that = (CourseCoverModel) o;
 
         if (!name.equals(that.name)) return false;
+        if (!author.equals(that.author)) return false;
         if (!imageUrl.equals(that.imageUrl)) return false;
         if (!courseUrl.equals(that.courseUrl)) return false;
 
@@ -29,6 +31,7 @@ public class CourseCoverModel implements Parcelable {
     @Override
     public int hashCode() {
         int result = name.hashCode();
+        result = 31 * result + author.hashCode();
         result = 31 * result + imageUrl.hashCode();
         result = 31 * result + courseUrl.hashCode();
         return result;
@@ -36,6 +39,7 @@ public class CourseCoverModel implements Parcelable {
 
     public CourseCoverModel(Parcel in) {
         name = in.readString();
+        author = in.readString();
         imageUrl = in.readString();
         courseUrl = in.readString();
     }
@@ -48,6 +52,7 @@ public class CourseCoverModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int i) {
         out.writeString(name);
+        out.writeString(author);
         out.writeString(imageUrl);
         out.writeString(courseUrl);
     }

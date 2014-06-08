@@ -36,8 +36,6 @@ public class CourseListActivity extends ActionBarActivity implements SwipeRefres
     protected void onStart() {
         spiceManager.start(this);
         super.onStart();
-
-        requestCourseList(false);
     }
 
     @Override
@@ -70,6 +68,8 @@ public class CourseListActivity extends ActionBarActivity implements SwipeRefres
                 startActivity(new Intent(Intent.ACTION_VIEW, courseUrl, getApplicationContext(), CourseViewActivity.class));
             }
         });
+
+        requestCourseList(false);
     }
 
     private void requestCourseList(final boolean refresh) {
@@ -178,6 +178,8 @@ public class CourseListActivity extends ActionBarActivity implements SwipeRefres
 
             ((TextView) view.findViewById(R.id.name)).setText(item.name);
             ((ImageView) view.findViewById(R.id.imageView)).setImageBitmap(null);
+            if (item.author != null)
+                ((TextView) view.findViewById(R.id.author)).setText("By " + item.author);
 
             requestCourseCover(view.getId(), Uri.withAppendedPath(SpiceService.baseUrl, item.imageUrl).toString());
 
