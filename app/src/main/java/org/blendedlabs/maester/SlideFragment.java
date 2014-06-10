@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -207,10 +206,13 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
             btn.setTextColor(Color.WHITE);
             ImageView icon = (ImageView)((View)btn.getParent()).findViewById(R.id.icon);
             if (ans.correct)
-                icon.setImageDrawable(new ColorDrawable(Color.parseColor("#00A000")));
+                icon.setImageResource(R.drawable.ic_correct);
             else
-                icon.setImageDrawable(new ColorDrawable(Color.RED));
+                icon.setImageResource(R.drawable.ic_incorrect);
             if (ans.hint != null) {
+                //CongratsDialog dialog = CongratsDialog.newInstance(ans.correct, ans.hint);
+                //dialog.show(getFragmentManager(), "congrats");
+
                 Toast.makeText(getActivity(), ans.hint, Toast.LENGTH_SHORT).show();
             }
         }

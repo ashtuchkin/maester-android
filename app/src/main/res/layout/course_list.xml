@@ -3,12 +3,13 @@
     android:id="@+id/course_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CourseListActivity">
+    tools:context=".CourseListActivity"
+    android:background="@drawable/course_list_background"
+    >
 
     <ListView android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/course_list_background"
          />
 
 </android.support.v4.widget.SwipeRefreshLayout>
